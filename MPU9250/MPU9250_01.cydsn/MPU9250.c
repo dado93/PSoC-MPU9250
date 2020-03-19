@@ -13,7 +13,6 @@
 #include "MPU9250_RegMap.h"
 #include "MPU9250_I2C.h"
 #include "math.h"
-#include "UART_1.h"
 #include "stdio.h"
 
 /* ========= MACROS ========= */
@@ -264,9 +263,6 @@ void MPU9250_SelfTest(float* deviation) {
         Acc[i]  /= 200;
         Gyro[i] /= 200;
     }
-    char message[50];
-    sprintf(message, "Avg: %5d %5d %5d -- %5d %5d %5d\r\n", Acc[0]*100, Acc[1]*100, Acc[2]*100, Gyro[0]*100, Gyro[1]*100, Gyro[2]*100);
-    UART_1_PutString(message);
     // Enable self test gyroscope
     temp = MPU9250_I2C_Read(MPU9250_I2C_ADDRESS, MPU9250_GYRO_CONFIG_REG);
     // Then, set bits [7,6,5]
@@ -296,8 +292,6 @@ void MPU9250_SelfTest(float* deviation) {
         ST_Acc[i]  /= 200;
         ST_Gyro[i] /= 200;
     }
-    sprintf(message, "STg: %5d %5d %5d -- %5d %5d %5d\r\n", ST_Acc[0]*100, ST_Acc[1]*100, ST_Acc[2]*100, ST_Gyro[0]*100, ST_Gyro[1]*100, ST_Gyro[2]*100);
-    UART_1_PutString(message);
     // Disable self test gyroscope -- Read config register
     temp = MPU9250_I2C_Read(MPU9250_I2C_ADDRESS, MPU9250_GYRO_CONFIG_REG);
     // Clear bits [7,6,5]

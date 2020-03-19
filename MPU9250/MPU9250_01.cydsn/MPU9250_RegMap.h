@@ -386,38 +386,44 @@
     * *Note*: For further information regarding the association of EXT_SENS_DATA registers to particular
     * slave devices, please refer to Registers 73 to 96. 
     *
-    * - [7] - TEMP_OUT:
-    *               - 1: Write TEMP_OUT_H and TEMP_OUT_L to the FIFO at the sample rate; If enabled
-    *                        buffering of data occurs even if data path is in standy.
-    *               - 0: Function is disabled
-    * - [6] - GYRO_XOUT:
-    *               - 1: Write GYRO_XOUT_H and GYRO_XOUT_L to the FIFO at the sample rate; If enabled
-    *                        buffering of data occurs even if data path is in standy.
-    *               - 0: Function is disabled
-    * - [5] - GYRO_YOUT:
-    *               - 1: Write GYRO_YOUT_H and GYRO_YOUT_L to the FIFO at the sample rate; If enabled
-    *                        buffering of data occurs even if data path is in standy.
-    *               - 0: Function is disabled
-    * - [4] - GYRO_ZOUT:
-    *               - 1: Write GYRO_ZOUT_H and GYRO_ZOUT_L to the FIFO at the sample rate; If enabled
-    *                        buffering of data occurs even if data path is in standy.
-    *               - 0: Function is disabled
-    * - [3] - ACCEL | 1 - Write ACCEL_XOUT_H, ACCEL_XOUT_L, ACCEL_YOU_H, ACCEL_YOUT_L, ACCEL_ZOUT_H,
-    *                     and ACCEL_ZOUT_L to the FIFO at the sample rate; If enabled
-    *                     buffering of data occurs even if data path is in standy.
-    *                 0 - Function is disabled
-    * - [2] - SLV_2 | 1 - Write EXT_SENS_DATA registers associated to SLV_2 (as determined by I2C_SLV0_CTRL,
-    *                     I2C_SLV1_CTROL, and I2C_SLV2_CTRL) to the FIFO at the sample rate; If enabled
-    *                     buffering of data occurs even if data path is in standy.
-    *                 0 - Function is disabled
-    * - [1] - SLV_1 | 1 - Write EXT_SENS_DATA registers associated to SLV_1 (as determined by I2C_SLV0_CTRL,
-    *                     I2C_SLV1_CTROL, and I2C_SLV2_CTRL) to the FIFO at the sample rate; If enabled
-    *                     buffering of data occurs even if data path is in standy.
-    *                 0 - Function is disabled
-    * - [0] - SLV_0 | 1 - Write EXT_SENS_DATA registers associated to SLV_0 (as determined by I2C_SLV0_CTRL,
-    *                     I2C_SLV1_CTROL, and I2C_SLV2_CTRL) to the FIFO at the sample rate; If enabled
-    *                     buffering of data occurs even if data path is in standy.
-    *                 0 - Function is disabled
+    * | BIT | NAME |
+    * |-----|------|
+    * | [7] | TEMP_OUT  |
+    * | [6] | GYRO_XOUT |
+    * | [5] | GYRO_YOUT |
+    * | [4] | GYRO_ZOUT |
+    * | [3] | ACCEL     |
+    * | [2] | SLV_2     |
+    * | [1] | SLV_1     |
+    * | [0] | SVL_0     |
+    * TEMP_OUT: If set, write TEMP_OUT_H and TEMP_OUT_L to the FIFO at the sample rate; If enabled
+    *           buffering of data occurs even if data path is in standy.
+    *           If cleared, function is disabled
+    * GYRO_XOUT: If set, write GYRO_XOUT_H and GYRO_XOUT_L to the FIFO at the sample rate; If enabled
+    *            buffering of data occurs even if data path is in standy.
+    *            If cleared, function is disabled
+    * GYRO_YOUT: If set, Write GYRO_YOUT_H and GYRO_YOUT_L to the FIFO at the sample rate; If enabled
+    *            buffering of data occurs even if data path is in standy.
+    *            If cleared, function is disabled
+    * GYRO_ZOUT: If set, write GYRO_ZOUT_H and GYRO_ZOUT_L to the FIFO at the sample rate; If enabled
+    *            buffering of data occurs even if data path is in standy.
+    *            If cleared, function is disabled
+    * ACCEL: If set, write ACCEL_XOUT_H, ACCEL_XOUT_L, ACCEL_YOU_H, ACCEL_YOUT_L, ACCEL_ZOUT_H,
+    *         and ACCEL_ZOUT_L to the FIFO at the sample rate; If enabled
+    *         buffering of data occurs even if data path is in standy.
+    *         If cleared, dunction is disabled
+    * SLV_2: If set, write EXT_SENS_DATA registers associated to SLV_2 (as determined by I2C_SLV0_CTRL,
+    *        I2C_SLV1_CTROL, and I2C_SLV2_CTRL) to the FIFO at the sample rate; If enabled
+    *        buffering of data occurs even if data path is in standy.
+    *        If cleared, Function is disabled
+    * SLV_1: If set, write EXT_SENS_DATA registers associated to SLV_1 (as determined by I2C_SLV0_CTRL,
+    *        I2C_SLV1_CTROL, and I2C_SLV2_CTRL) to the FIFO at the sample rate; If enabled
+    *        buffering of data occurs even if data path is in standy.
+    *        If cleared, function is disabled
+    * SLV_0: If set, write EXT_SENS_DATA registers associated to SLV_0 (as determined by I2C_SLV0_CTRL,
+    *        I2C_SLV1_CTROL, and I2C_SLV2_CTRL) to the FIFO at the sample rate; If enabled
+    *        buffering of data occurs even if data path is in standy.
+    *        If cleared, function is disabled
     */
     #ifndef MPU9250_FIFO_EN_REG
         #define MPU9250_FIFO_EN_REG 0x23
@@ -429,17 +435,25 @@
     * *Note*: For further information regarding the association of EXT_SENS_DATA registers to particular
     * slave devices, please refer to Registers 73 to 96. 
     *
-    * - [7] - MULT_MST_EN: Enables multi-master capability. When disabled, clocking to the I2C_MST_IF
+    * | BIT | NAME |
+    * |-----|------|
+    * | [7] | MULT_MST_EN |
+    * | [6] | WAIT_FOR_ES | 
+    * | [5] | SLV_3_FIFO_EN | 
+    * | [4] - I2C_MST_P_NSR |
+    * | [3:0] | I2C_MST_CLK[3:0] |
+    * 
+    * MULT_MST_EN: Enables multi-master capability. When disabled, clocking to the I2C_MST_IF
     *                      can be disabled when not in use and the logic to detect lost arbitration is
     *                      disabled.
-    * - [6] - WAIT_FOR_ES: Delays the data ready interrupt until external sensor data is loaded. If
+    * WAIT_FOR_ES: Delays the data ready interrupt until external sensor data is loaded. If
     *        I2C_MST_IF is disabled, the interrupt will still occur.
-    * - [5] - SLV_3_FIFO_EN: 1 write EXT_SENS_DATA registers associated to SLV_3 (as determined by I2C_SLV0_CTRL,
+    * SLV_3_FIFO_EN : 1 write EXT_SENS_DATA registers associated to SLV_3 (as determined by I2C_SLV0_CTRL,
     *                        I2C_SLV1_CTRL, and I2C_SLV2_CTRL) to the FIFO at the sample rate;
     *                        0 function is disabled
-    * - [4] - I2C_MST_P_NSR: This bit controls the I2C Master's transition from one slave read to the next slave
+    * I2C_MST_P_NSR: This bit controls the I2C Master's transition from one slave read to the next slave
     *                        read. If 0, there is a restart between reads. If 1, there is a stop between reads.
-    * - [3:0] - I2C_MST_CLK[3:0]: I2C_MST_CLK is a 4 bit unsigned value which configures a divider on the MPU-9250
+    * I2C_MST_CLK is a 4 bit unsigned value which configures a divider on the MPU-9250
     *                             internal 8MHz clock. It sets the I2C master clock speed according to the 
     *                             following table:
     *
@@ -491,6 +505,10 @@
     
     /**
     * @brief I2C Slave 0 Control register.
+    *
+    * | BIT   | NAME | FUNCTION |
+    * |:-----:|------|---------| 
+    * | [7:0] | I2C_SLV0_REG[7:0] | I2C slave register address from where to begin data transfer |
     *
     */
     #ifndef MPU9250_I2C_SLV0_CTRL_REG
@@ -1000,6 +1018,9 @@
     
     /**
     * @brief Who Am I register.
+    *
+    * This register contains the WHO AM I value of the chip.
+    * The expected value when reading this 
     */
     #ifndef MPU9250_WHO_AM_I_REG
         #define MPU9250_WHO_AM_I_REG 0x75
