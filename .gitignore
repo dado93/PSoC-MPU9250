@@ -6,6 +6,7 @@
 *.cyprj.*
 
 # Generated Assets and Resources
+Backup/
 Debug/
 Docs/
 Release/
